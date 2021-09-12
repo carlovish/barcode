@@ -1,0 +1,42 @@
+<div class="container-fluid">
+
+  <div class="row justify-content-center mt-2 py-5">
+    <div class="col-md-10">
+      <mdb-card>
+        
+        <mdb-card-body>
+          <mdb-card-title>
+            <h1>Códigos de barras</h1>
+          </mdb-card-title>
+      
+          <mdb-card-text>
+            <div class="row">
+              <div class="col-sm-6 col-md-4">
+                <p  class="mb-3">Cambiar la base de datos</p>
+                <select class="form-control mb-3"  [(ngModel)]="bd" (ngModelChange)="baseSeleccionada()">
+                    <option *ngFor="let bd of bds" [value]="bd">{{bd}}</option>
+                </select>
+                <input id="barcode" ngxBarCodePut type="text" class="form-control mb-3" autofocus [(ngModel)]="barcode" (onDetected)="tomaCodigo()">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-10">
+                <input type="text" matInput [matAutocomplete]="auto" class="form-control" placeholder="Productos" [(ngModel)]="filtro" (input)="filtraProductos()">
+                  <mat-autocomplete #auto="matAutocomplete" >
+                      <mat-option *ngFor="let producto of productos" [value]="producto.descripcion" (onSelectionChange)="ponProducto(producto.referencia)">
+                          {{producto.descripcion}}
+                      </mat-option>
+                  </mat-autocomplete>
+                  <p class="mt-4 red-text">{{mensaje}}</p>
+                </div>
+            </div>
+          </mdb-card-text>
+          <a mdbBtn color="primary" mdbWavesEffect (click)="ponCodigoDeBarra(productoSeleccionado)" *ngIf="asignar">Asignar</a>
+            
+        </mdb-card-body>
+      </mdb-card>
+      
+    </div>
+  </div>
+  
+</div>
